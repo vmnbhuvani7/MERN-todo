@@ -9,24 +9,24 @@ import CrudTodo from './CrudTodo'
 
 const Dashboard = () => {
     let history = useHistory();
+    const userRole = localStorage.getItem("userRole")
     const [_deleteUser] = useMutation(DELETE_USER);
     const [pageSize] = useState(5);
     const [page, setPage] = useState(0);
     const [show, setShow] = useState(false);
     const [userData, setUserData] = useState([]);
     const [user, setUser] = useState({});
-    const [filterUser, setFilterUser] = useState("");
+    const [searchUserData, setSearchUser] = useState("");
+    const [filterData, setFilterData] = useState(userRole !== "SuperAdmin" ? JSON.stringify({ isDeleted: false }) : JSON.stringify({}));
     const [role, setRole] = useState(false);
     const { data, refetch } = useQuery(GETADMINUSERS, {
         fetchPolicy: 'cache-and-network',
-        variables: { page: page + 1, limit: pageSize, search: filterUser },
+        variables: { page: page + 1, limit: pageSize, search: searchUserData, filter: filterData },
     })
-    const userRole = localStorage.getItem("userRole")
 
     useEffect(() => {
         if (userRole !== "SuperAdmin") {
             setRole(true)
-
         }
     }, [])
     useEffect(() => {
@@ -57,7 +57,7 @@ const Dashboard = () => {
     }
 
     const searchUser = (e) => {
-        setFilterUser(e.target.value)
+        setSearchUser(e.target.value)
         refetch()
         setPage(0)
     }
@@ -82,7 +82,7 @@ const Dashboard = () => {
                     <span className="borderBottomOfTitle">
                     </span>
                 </div>
-                {role &&
+                {!role &&
                     <div className="float-right">
                         <button className="btn yellow" onClick={(e) => addUser()}>
                             <i className="fa fa-plus">
@@ -119,22 +119,25 @@ const Dashboard = () => {
                                     <thead>
                                         <tr>
                                             <th style={{ width: '10%' }} className="text-center">No.</th>
-                                            <th style={{ width: '40%' }} >User Name</th>
-                                            <th style={{ width: '40%' }} >Email</th>
-                                            {role && <th>Edit</th>}
-                                            {role && <th>Delete</th>}
+                                            <th style={{ width: '25%' }} >User Name</th>
+                                            <th style={{ width: '30%' }} >Email</th>
+                                            <th style={{ width: '25%' }} >Role</th>
+                                            {!role && <th>Edit</th>}
+                                            {!role && <th>Delete</th>}
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         {
                                             userData?.map((d, i) => {
+                                                console.log("d",d)
                                                 return (
                                                     <tr key={i}>
                                                         <td className=" text-center">{(page * pageSize) + i + 1}</td>
                                                         <td>{d?.userName}</td>
                                                         <td>{d?.email}</td>
-                                                        {role && <>
+                                                        <td>{d?.roles}</td>
+                                                        {!role && <>
                                                             <td>
                                                                 <span className="btn BoxImg bg-skyBlue rounded mr-2 pointer" onClick={() => editUser(d)}>
                                                                     <i class="fa fa-edit"></i>

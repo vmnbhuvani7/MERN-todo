@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const GETADMINUSERS = gql`
-query getAdminUsers ($page: Int, $limit: Int, $search: String) {
-    getAdminUsers (page: $page, limit: $limit, search: $search) {
+query getAdminUsers ($page: Int, $limit: Int, $search: String, $filter: String) {
+  getAdminUsers (page: $page, limit: $limit, search: $search, filter:$filter) {
       count
       data{
        id

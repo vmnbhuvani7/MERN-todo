@@ -32,6 +32,9 @@ module.exports = {
                             { "_id": { $nin: [me._id] } }
                         ],
                     };
+                    if (args.filter) {
+                        filter['$and'].push(JSON.parse(args.filter))
+                    }
                     const sort = { "createdAt": -1 }
                     await models.User.paginate(
                         filter,
