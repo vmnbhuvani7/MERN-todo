@@ -1,0 +1,43 @@
+{
+  "name": "apollo-post-crud",
+  "author": "Vaman Bhuvani",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/index.js"
+  },
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/register": "^7.15.3",
+    "apollo-server": "^2.25.2",
+    "apollo-server-errors": "^3.1.0",
+    "apollo-server-express": "^2.21.2",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "consola": "^2.15.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "express-form-data": "^2.0.17",
+    "graphql": "^15.5.3",
+    "graphql-resolvers": "^0.4.2",
+    "graphql-tools": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.12.2",
+    "mongoose-paginate": "^5.0.3",
+    "nodemailer": "^6.6.3",
+    "nodemon": "^2.0.7",
+    "validator": "^13.6.0",
+    "yup": "^0.32.9"
+  }
+}
